@@ -7,18 +7,7 @@ const chatService = function() {
 
 
     let messageArray = [
-        {
-            username: "oluyemi",
-            message: "This is a new message"
-        },
-        {
-            username: "Demo",
-            message: "This is a new for demo"
-        },
-        {
-            username: "sample",
-            message: "Another reply from me"
-        }
+        
     ];
 
 
