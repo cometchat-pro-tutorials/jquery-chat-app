@@ -66,6 +66,7 @@ const chatService = function() {
 
                 $('#group-message-holder').append(messageList);
             });
+            this.scrollToBottom();
         },
         sendMessage: function(message){
             $('#send-message-spinner').show();
@@ -110,6 +111,11 @@ const chatService = function() {
                 }
                 $('#group-message-holder').append(messageList);
             });
+            this.scrollToBottom();
+        },
+        scrollToBottom() {
+            const chat = document.getElementById("msg-page");
+            chat.scrollTo(0, chat.scrollHeight + 30);
         }
     }
 }();

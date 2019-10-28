@@ -59,7 +59,8 @@ const chatService = function() {
                         }
         
                         $('#group-message-holder').append(messageList);
-                    });                    
+                    }); 
+                    this.scrollToBottom();                   
                 },
                 error => {
                     console.log("Message fetching failed with error:", error);
@@ -121,8 +122,8 @@ const chatService = function() {
                     });  
 
                     this.onMessageReceived();
+                    this.scrollToBottom();
 
-                    $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
                 },
                 error => {
                     console.log("Message sending failed with error:", error);
@@ -179,14 +180,13 @@ const chatService = function() {
             
                             $('#group-message-holder').append(messageList);
                         });  
-
-                        $("html, body").animate({ scrollTop: $(document).height() - $(window).height() }, 'slow');
+                        this.scrollToBottom();
                     }
                 })
             )            
         },
         initializeApp: function() {
-            CometChat.init('YOUR_COMET_CHAT_APPID').then(
+            CometChat.init('1024084db71af28').then(
                 () => {
                     console.log("Initialization completed successfully");
                     const username = prompt(`Welcome to our little Vue demo powered by CometChat. Login with the username superhero1 or superhero2 and test the chat out. To create your own user, copy this link 'https://prodocs.cometchat.com/reference#createuser' and paste into your address-bar`);
@@ -198,7 +198,7 @@ const chatService = function() {
             )
         },
         authLoginUser: function(username) {
-            let apiKey = "YOUR_COMET_CHAT_API_KEY";
+            let apiKey = "30176ff7d8b4bbe2f45664eb201dcdb72d6c7749";
             $('#loading-message-container').show();
 
             CometChat.login(username, apiKey).then(
@@ -228,6 +228,10 @@ const chatService = function() {
                     console.log(error);
                 }
             )
+        },
+        scrollToBottom() {
+            const chat = document.getElementById("msg-page");
+            chat.scrollTo(0, chat.scrollHeight + 30);
         }
     }
 }();
