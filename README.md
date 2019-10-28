@@ -27,3 +27,10 @@ To run the demo follow these steps:
 4. Click **API Keys** on the left-hand-side and note the automatically-generated Full access API Key and the application ID as well
 5. Go to the **Groups** tab and note the GUID of the group automatically created by CometChat
 6. Download the repository [here](https://github.com/cometchat-pro-tutorials/jquery-chat-app/archive/master.zip) or by running `git clone https://github.com/cometchat-pro-tutorials/jquery-chat-app.git`
+
+7. Open the script located in `./js/chatServiceUpdated.js` within the project. Then, locate the placeholder below witht th appropriate credentials as obtained from your CometChat dashboard.
+
+```
+YOUR_COMET_CHAT_APPID
+YOUR_COMET_CHAT_API_KEY
+```
