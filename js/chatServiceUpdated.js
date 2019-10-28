@@ -186,7 +186,7 @@ const chatService = function() {
             )            
         },
         initializeApp: function() {
-            CometChat.init('1024084db71af28').then(
+            CometChat.init('YOUR_COMET_CHAT_APP_ID').then(
                 () => {
                     console.log("Initialization completed successfully");
                     const username = prompt(`Welcome to our little Vue demo powered by CometChat. Login with the username superhero1 or superhero2 and test the chat out. To create your own user, copy this link 'https://prodocs.cometchat.com/reference#createuser' and paste into your address-bar`);
@@ -198,7 +198,7 @@ const chatService = function() {
             )
         },
         authLoginUser: function(username) {
-            let apiKey = "30176ff7d8b4bbe2f45664eb201dcdb72d6c7749";
+            let apiKey = "YOUR_COMET_CHAT_API_KEY";
             $('#loading-message-container').show();
 
             CometChat.login(username, apiKey).then(
