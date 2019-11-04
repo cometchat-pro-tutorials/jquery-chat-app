@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    chatService.fetchMessages();
+
+    
     $('#message-form').submit(function(e) {    
         e.preventDefault(); 
         let message = $('#input-text').val(); 
@@ -16,6 +19,4 @@ $(document).ready(function() {
         
         $('#message-form').trigger('reset');
     });
-
-    chatService.fetchMessages();
 });

@@ -512,7 +512,7 @@ nav .spinner {
   }
 }
 
-.booker {
+.chat-app-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;

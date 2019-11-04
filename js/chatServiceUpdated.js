@@ -9,6 +9,49 @@ const chatService = function() {
     let messageArray = [];
     
     return {
+        initializeApp: function() {
+            CometChat.init('YOUR_COMET_CHAT_APP_ID').then(
+                () => {
+                    console.log("Initialization completed successfully");
+                    const username = prompt(`Welcome to our jQuery chat demo powered by CometChat. Login with the username superhero1 or superhero2 and test the chat out. To create your own user, copy this link 'https://prodocs.cometchat.com/reference#createuser' and paste into your address-bar`);
+                    this.authLoginUser(username);
+                },
+                error => {
+                    console.log("Initialization failed with error:", error);
+                }
+            )
+        },
+        authLoginUser: function(username) {
+            let apiKey = "YOUR_COMET_CHAT_API_KEY";
+            $('#loading-message-container').show();
+
+            CometChat.login(username, apiKey).then(
+                () => {
+                    console.log("Login successfully");
+                    this.getLoggedInUser();
+                },
+                error => {
+                    alert("Whops. Something went wrong. This commonly happens when you enter a username that doesn't exist. Check the console for more information")
+                    console.log("Login failed with error:", error.code);
+                }
+            )
+        },
+        getLoggedInUser: function() {
+            CometChat.getLoggedinUser().then(
+                user => {
+                    $('#loggedInUsername').text(user.name);
+                    $('#loggedInUserAvatar').attr("src", user.avatar)
+                    $('#loggedInUID').val(user.uid);
+
+                    $('#loading-message-container').hide();
+
+                    this.fetchMessages();
+                },
+                error => {
+                    console.log(error);
+                }
+            )
+        },
         fetchMessages: function() {
             const messagesRequest = new CometChat.MessagesRequestBuilder()
             .setLimit(100)
@@ -73,7 +116,6 @@ const chatService = function() {
             let messageText = $('#input-text').val();
             let messageType = CometChat.MESSAGE_TYPE.TEXT;
             let receiverType = CometChat.RECEIVER_TYPE.GROUP;
-            // let globalContext 
     
             let textMessage = new CometChat.TextMessage(
                 receiverID, messageText, messageType, receiverType
@@ -184,50 +226,6 @@ const chatService = function() {
                     }
                 })
             )            
-        },
-        initializeApp: function() {
-            CometChat.init('YOUR_COMET_CHAT_APP_ID').then(
-                () => {
-                    console.log("Initialization completed successfully");
-                    const username = prompt(`Welcome to our little Vue demo powered by CometChat. Login with the username superhero1 or superhero2 and test the chat out. To create your own user, copy this link 'https://prodocs.cometchat.com/reference#createuser' and paste into your address-bar`);
-                    this.authLoginUser(username);
-                },
-                error => {
-                    console.log("Initialization failed with error:", error);
-                }
-            )
-        },
-        authLoginUser: function(username) {
-            let apiKey = "YOUR_COMET_CHAT_API_KEY";
-            $('#loading-message-container').show();
-
-            CometChat.login(username, apiKey).then(
-                () => {
-                    console.log("Login successfully");
-                    this.getLoggedInUser();
-                    // this.fetchMessages();
-                },
-                error => {
-                    alert("Whops. Something went wrong. This commonly happens when you enter a username that doesn't exist. Check the console for more information")
-                    console.log("Login failed with error:", error.code);
-                }
-            )
-        },
-        getLoggedInUser: function() {
-            CometChat.getLoggedinUser().then(
-                user => {
-                    $('#loggedInUsername').text(user.name);
-                    $('#loggedInUserAvatar').attr("src", user.avatar)
-                    $('#loggedInUID').val(user.uid);
-
-                    $('#loading-message-container').hide();
-
-                    this.fetchMessages();
-                },
-                error => {
-                    console.log(error);
-                }
-            )
         },
         scrollToBottom() {
             const chat = document.getElementById("msg-page");
